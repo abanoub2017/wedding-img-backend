@@ -113,7 +113,7 @@ app.get("/images", mockAuth, async (req, res) => {
   try {
     let images;
     // Admin can see all images
-    if (req.user.role === 'admin') {
+    if (req.user.role == 'admin' || req.user.role == 'fam' || req.user.role == 'monica') {
       images = await Image.find().sort({ createdAt: -1 });
     } else {
       // Regular users can only see their own images
