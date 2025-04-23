@@ -7,9 +7,16 @@ function mockAuth(req, res, next) {
 }
 
 // Check if user can view an image
+// Helper function to check if a user has admin privileges
+function isAdmin(role) {
+  const adminRoles = ['admin', 'fam', 'monica'];
+  return role && adminRoles.includes(role.toLowerCase());
+}
+
 function canViewImage(req, res, next) {
   // If user is admin, they can see all images
-  if (req.user.role === "admin") {
+  // In your middleware
+  if (isAdmin(req.user.role)) {
     return next();
   }
 
